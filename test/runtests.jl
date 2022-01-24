@@ -1,4 +1,4 @@
-using <module-name>
+using MahjongTiles
 
 using Test
 

@@ -1,20 +1,20 @@
 push!(LOAD_PATH, "../src/")
 
-using Documenter, <module-name>
+using Documenter, MahjongTiles
 
 makedocs(
-    sitename="<package-name> Documentation",
+    sitename="MahjongTiles.jl Documentation",
     format=Documenter.HTML(
         prettyurls=get(ENV, "CI", nothing) == "true"
     ),
-    modules=[<module-name>],
+    modules=[MahjongTiles],
     pages=[
         "Home" => "index.md"
     ]
 )
 
 deploydocs(
-    repo = "github.com/tmthyln/<package-name>.git",
+    repo = "github.com/tmthyln/MahjongTiles.jl.git",
     devbranch = "main",
     devurl="latest"
     )
