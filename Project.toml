@@ -1,9 +1,10 @@
 name = "MahjongTiles"
 uuid = "4428f09d-fda0-4bc5-909e-74e028533219"
 authors = ["Timothy Lin <32549553+tmthyln@users.noreply.github.com>"]
-version = "0.1.0"
+version = "1.0.0"
 
 [deps]
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [compat]
 julia = "1.6"
