@@ -11,6 +11,21 @@ Some properties:
 struct TilePile
     tiles::Vector{SuitedTile}
 end
+
+@doc """
+    TilePile(tiles)
+    TilePile(name)
+
+Create a particular predefined/standard `TilePile` given the `name`, or
+create the `TilePile` from a specific list of tiles.
+
+## Supported Names
+
+### `:standard`
+
+4 of each numbered tile from the 3 suits, plus 4 of each wind, 4 of each dragon, and the 8 flowers/seasons
+
+"""
 function TilePile(type::Symbol)
     if type == :standard
         tiles = [
@@ -33,13 +48,44 @@ Base.first(tp::TilePile, n::Integer) = first(tp.tiles, n)
 Base.last(tp::TilePile) = last(tp.tiles)
 Base.last(tp::TilePile, n::Integer) = last(tp.tiles, n)
 
+"""
+    popfirst!(tilepile)
+
+Remove the "first" tile from the tile pile.
+Removing from this end is intended to be used for flower/four-of-a-kind replacement
+(this is to improve average performance).
+"""
 Base.popfirst!(tp::TilePile) = popfirst!(tp.tiles)
+
+"""
+    popfirst!(tilepile, num_tiles)
+
+Remove the "first" `num_tiles` tiles from the tile pile as an array.
+Removing from this end is intended to be used for flower/four-of-a-kind replacement
+(this is to improve average performance).
+"""
 function Base.popfirst!(tp::TilePile, n::Integer)
     n < 0 && throw("cannot pop fewer than 0 tiles")
 
     return splice!(tp.tiles, 1:min(n, lastindex(tp.tiles)))
 end
+
+"""
+    pop!(tilepile)
+
+Remove a tile from the end of the tile pile.
+Removing from this end is used for the usual pickup of tiles from the deck
+(not for flower/four-of-a-kind replacement).
+"""
 Base.pop!(tp::TilePile) = pop!(tp.tiles)
+
+"""
+    pop!(tilepile, num_tiles)
+
+Remove `num_tiles` tiles from the end of the tile pile as an array.
+Removing from this end is used for the usual pickup of tiles from the deck
+(not for flower/four-of-a-kind replacement).
+"""
 function Base.pop!(tp::TilePile, n::Integer)
     n < 0 && throw("cannot pop fewer than 0 tiles")
 

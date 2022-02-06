@@ -83,11 +83,26 @@ typical_duplication(::Type{Dragon}) = 4
 Base.isless(x::Type{<:Suit}, y::Type{<:Suit}) = first_char(x) < first_char(y)
 
 #=================================== TILES ===================================#
+
+"""
+The root tile type for Mahjong tiles. 
+However, the contract for what the Tile interface entails is not well-defined,
+so most functions dispatch on the `SuitedTile` and not on `Tile`.
+"""
 abstract type Tile end
 
+"""
+A tile with a suit (or pseudo-suit).
+"""
 struct SuitedTile{SuitType <: Suit} <: Tile
     number::Int8
 
+    """
+        SuitedTile(suit_type, number=1)
+    
+    Create a tile of a particular suit `suit_type` and `number`
+    (use the default `1` for a "suit" that has only 1 tile).
+    """
     function SuitedTile(SuitType::Type{<:Suit}, number::Integer = 1)
         number < 1 && throw("number must be positive")
         number > max_number(SuitType) && throw("number is greater than the max allowed for this suit")
@@ -95,6 +110,11 @@ struct SuitedTile{SuitType <: Suit} <: Tile
         return new{SuitType}(number)
     end
 end
+
+suit(::SuitedTile{T}) where T = T
+number(tile::SuitedTile) = tile.number
+is_suit(::SuitedTile{T}, suit_type::Type{<:Suit}) where T = T == suit_type
+is_number(tile::SuitedTile, num::Integer) = tile.number == num
 
 function Base.:(==)(x::SuitedTile{T}, y::SuitedTile{S}) where {T, S}
     return T == S && x.number == y.number
@@ -134,14 +154,71 @@ for suit in [Character, Bamboo, Circle, Wind, Dragon, Flower, Season], i in 1:ma
     @eval MahjongTiles, export $tile_name
 end
 
-character(index::Integer) = SuitedTile(Character, index)
-bamboo(index::Integer) = SuitedTile(Bamboo, index)
-circle(index::Integer) = SuitedTile(Circle, index)
-wind(index::Integer) = SuitedTile(Wind, index)
-dragon(index::Integer) = SuitedTile(Dragon, index)
-flower(index::Integer) = SuitedTile(Flower, index)
-season(index::Integer) = SuitedTile(Season, index)
+@doc """
+    character(index)
 
+Creates a tile of the character suit with the particular number.
+
+## Example
+
+```jldoctest
+julia> character(5)
+🀋
+```
+
+"""
+character(index::Integer) = SuitedTile(Character, index)
+
+@doc """
+    bamboo(index)
+
+Creates a tile of the bamboo suit with the particular number.
+
+## Example
+
+```jldoctest
+julia> bamboo(2)
+🀑
+```
+"""
+bamboo(index::Integer) = SuitedTile(Bamboo, index)
+
+@doc """
+    circle(index)
+
+Creates a tile of the circle suit with the particular number.
+
+## Example
+
+```jldoctest
+julia> circle(9)
+🀡
+```
+"""
+circle(index::Integer) = SuitedTile(Circle, index)
+
+@doc """
+    wind(index)
+    wind(direction)
+
+Creates a wind tile. 
+If an integer is used, 
+the standard Chinese ordering of the cardinal directions is used
+(i.e. `1` -> east, `2` -> south, `3` -> west, `4` -> north).
+Otherwise, symbols can also be used for the names of the directions
+(e.g. `:east`, `:north`).
+
+## Example
+
+```jldoctest
+julia> wind(:north)
+🀃
+
+julia> wind(2)
+🀁
+```
+"""
+wind(index::Integer) = SuitedTile(Wind, index)
 function wind(name::Symbol)
     if name === :east
         return SuitedTile(Wind, 1)
@@ -155,6 +232,29 @@ function wind(name::Symbol)
         throw("unrecognized cardinal direction")
     end
 end
+
+@doc """
+    dragon(index)
+    dragon(name)
+
+Creates a wind tile. 
+If an integer is used, 
+the standard ordering is used
+(i.e. `1` -> red dragon, `2` -> green dragon, `3` -> white dragon).
+Otherwise, symbols can also be used for their names/colors
+(e.g. `:red`, `:green`).
+
+## Example
+
+```jldoctest
+julia> dragon(:red)
+🀄
+
+julia> dragon(2)
+🀅
+```
+"""
+dragon(index::Integer) = SuitedTile(Dragon, index)
 function dragon(name::Symbol)
     if name === :red
         return SuitedTile(Dragon, 1)
@@ -166,3 +266,41 @@ function dragon(name::Symbol)
         throw("unrecognized dragon color")
     end
 end
+
+@doc """
+    flower(index)
+
+Creates a flower tile with the particular number.
+
+!!! note
+
+    While this function (and the `season` function) don't allow using the flower (season) names,
+    they may have this functionality in the future.
+
+## Example
+
+```jldoctest
+julia> flower(2)
+🀣
+```
+"""
+flower(index::Integer) = SuitedTile(Flower, index)
+
+@doc """
+    season(index)
+
+Creates a season (flower) tile with the particular number.
+
+!!! note
+
+    While this function (and the `flower` function) don't allow using the season (flower) names,
+    they may have this functionality in the future.
+
+## Example
+
+```jldoctest
+julia> season(4)
+🀩
+```
+"""
+season(index::Integer) = SuitedTile(Season, index)
