@@ -85,4 +85,4 @@ There's also a similar project [MahjongEnvironment](https://github.com/coldinjec
 however, this package differs in
 - more broad scope beyond just reinforcement learning
 - registered
-- support different variants of Mahjong in a more general way
+- supporting different variants of Mahjong in a more general way
