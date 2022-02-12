@@ -47,6 +47,8 @@ Base.first(tp::TilePile) = first(tp.tiles)
 Base.first(tp::TilePile, n::Integer) = first(tp.tiles, n)
 Base.last(tp::TilePile) = last(tp.tiles)
 Base.last(tp::TilePile, n::Integer) = last(tp.tiles, n)
+Base.iterate(tilepile::TilePile) = iterate(tilepile.tiles)
+Base.iterate(tilepile::TilePile, state) = iterate(tilepile.tiles, state)
 
 """
     popfirst!(tilepile)
@@ -91,10 +93,24 @@ function Base.pop!(tp::TilePile, n::Integer)
 
     return splice!(tp.tiles, max(1, lastindex(tp.tiles) - n + 1):lastindex(tp.tiles))
 end
-Random.shuffle!(tp::TilePile) = shuffle!(tp.tiles)
-Random.shuffle!(rng, tp::TilePile) = shuffle!(rng, tp.tiles)
+Random.shuffle!(tp::TilePile) = (shuffle!(tp.tiles); tp)
+Random.shuffle!(rng, tp::TilePile) = (shuffle!(rng, tp.tiles); tp)
 
 Base.circshift(tp::TilePile, shift) = TilePile(circshift(tp.tiles, shift))
+
+function Base.show(io::IO, mime::MIME"text/plain", tilepile::TilePile)
+    for tile in tilepile.tiles
+        show(io, mime, tile)
+    end
+end
+function Base.show(io::IO, tilepile::TilePile)
+    print(io, "TilePile([")
+    for (index, tile) in enumerate(tilepile)
+        print(io, tile)
+        index != length(tilepile) && print(io, ", ")
+    end
+    print(io, "])")
+end
 
 
 function deal_tiles(tp::TilePile; quadruple_rounds=3, single_rounds=1)

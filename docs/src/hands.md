@@ -7,10 +7,18 @@ A `Hand` represents the set of tiles that a particular player has
 MahjongTiles.Hand
 ```
 
-`Hand`s support the following operations that behave similarly to how they do in Julia Base:
+## Supported Operations
+
+```@docs
+MahjongTiles.push_hidden!
+MahjongTiles.push_exposed!
+MahjongTiles.expose!
+```
+
+`Hand`s also support the following operations that behave similarly to how they do in Julia Base:
 
 - iteration
-- `push!`
+- `first`
 
 ## Scoring Functions
 
@@ -27,4 +35,6 @@ but only whether the configuration applies.
 
 ```@docs
 MahjongTiles.is_pure
+MahjongTiles.is_single_suit
+MahjongTiles.has_dragon_triple
 ```

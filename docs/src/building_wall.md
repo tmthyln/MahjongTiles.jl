@@ -20,3 +20,26 @@ In the standard variation, there are the following tile quantities:
 | Flowers/Seasons | 🀢🀤🀦🀩     | 1 of each             |
 
 ## Create and shuffle the deck
+
+For the standard deck, there's a single argument constructor that automatically creates a deck with the correct number of tiles.
+
+```@example deck
+using MahjongTiles: TilePile
+
+deck = TilePile(:standard)
+```
+
+Then, we shuffle the deck.
+
+```@example deck
+using Random
+
+shuffle!(deck)
+```
+
+In a physical game of Mahjong, 
+dice are rolled to determine where to start distributing tiles.
+However, this is mostly an anti-cheat measure.
+We could roll some dice and then use `circshift` to adjust the deck,
+but that's mostly for show (or in a GUI implementation).
+

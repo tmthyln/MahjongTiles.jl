@@ -133,13 +133,19 @@ function Base.show(io::IO, ::MIME"text/plain", tile::SuitedTile{T}) where T
     print(io, first_char(T) + tile.number - 1)
 end
 function Base.show(io::IO, tile::SuitedTile{T}) where T
-    show(io::IO, MIME"text/plain", tile)
+    show(io::IO, MIME"text/plain"(), tile)
 end
 
 #============================== TILE CONSTANTS ===============================#
 
 """
 List of the "normal" suits: character, bamboo, circles.
+
+```@repl
+using MahjongTiles
+
+MahjongTiles.suits
+```
 """
 const suits = [Character, Bamboo, Circle]
 

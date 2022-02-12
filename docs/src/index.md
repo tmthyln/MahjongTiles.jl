@@ -37,3 +37,4 @@ however, this package differs in
 - more broad scope beyond just reinforcement learning
 - registered
 - supporting different variants of Mahjong in a more general way
+- is not intended to provide a full Mahjong game environment
