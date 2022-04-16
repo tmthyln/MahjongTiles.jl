@@ -30,17 +30,11 @@ Base.popfirst!(::MahjongTiles.TilePile, ::Integer)
 ## Other Operations
 
 These are other functions supported for the `TilePile` type,
-but since they behave the same as in Julia Base,
-they aren't further documented.
+which behave similar to the way they do in Julia Base.
 
 - `length`
 - `first`
 - `last`
 - `circshift`
+- `circshift!` (this has a slightly different signature than in Base)
 - `shuffle!`
-
-!!! warning
-
-    Because circshift does not modify the `TilePile`, 
-    there is a plan to implement a mutating `circshift!`,
-    which will deprecate `circshift`.

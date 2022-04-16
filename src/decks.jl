@@ -97,6 +97,13 @@ Random.shuffle!(tp::TilePile) = (shuffle!(tp.tiles); tp)
 Random.shuffle!(rng, tp::TilePile) = (shuffle!(rng, tp.tiles); tp)
 
 Base.circshift(tp::TilePile, shift) = TilePile(circshift(tp.tiles, shift))
+function Base.circshift!(tp::TilePile, shift)
+    temp = tp.tiles[end-shift+1:end]
+    tp.tiles[shift+1:end] = tp.tiles[begin:end-shift+1]
+    tp.tiles[begin:shift] = temp
+
+    return tp
+end
 
 function Base.show(io::IO, mime::MIME"text/plain", tilepile::TilePile)
     for tile in tilepile.tiles
