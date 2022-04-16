@@ -16,7 +16,7 @@ In the standard variation, there are the following tile quantities:
 |          Bamboo | 🀐🀑🀗      | 4 per number          |
 |          Circle | 🀙🀝🀟      | 4 per number          |
 |           Winds | 🀀🀁🀂🀃     | 4 of each             |
-|         Dragons | 🀄🀅🀆     | 4 of each             |
+|         Dragons | 🀄🀅🀆      | 4 of each             |
 | Flowers/Seasons | 🀢🀤🀦🀩     | 1 of each             |
 
 ## Create and shuffle the deck

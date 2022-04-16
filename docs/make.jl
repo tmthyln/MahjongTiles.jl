@@ -10,6 +10,7 @@ makedocs(
     modules=[MahjongTiles],
     pages=[
         "Home" => "index.md",
+        "Mahjong Rules" => "rules_resources.md",
         "Anatomy of a Game" => [
             "Building the Wall" => "building_wall.md",
             "Dealing the Hands" => "dealing.md",

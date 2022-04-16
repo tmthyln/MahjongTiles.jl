@@ -1,7 +1,8 @@
 # MahjongTiles.jl Documentation
 
 This is a library package for working with Mahjong games and its primitives,
-such as tiles, decks, and hands.
+such as tiles, decks, and hands. 
+It's designed to be useful for both simulation or gameplay.
 
 ## Getting Started
 

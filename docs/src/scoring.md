@@ -9,12 +9,6 @@ we need to "score" two parts:
 It turns out, this is not *that* straightforward, 
 because we need to search through all possible ways to arrange the tiles in a valid way.
 In general, we also want to combine this with the scoring
-so that we find the arrangement with the highest point score.
-
-For example, how do we score this one?
-
-```@example scoring
-using MahjongTiles
-
-```
+so that we find the arrangement with the highest point score,
+and rules can be complex.
 
