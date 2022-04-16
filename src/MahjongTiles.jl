@@ -1,5 +1,11 @@
 module MahjongTiles
 
+export 
+
+character, bamboo, circle, wind, dragon, flower, season
+
+
+
 # define the suits and all the tiles
 include("tiles.jl")
 
