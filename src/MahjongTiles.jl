@@ -1,9 +1,8 @@
 module MahjongTiles
 
 export 
-
 character, bamboo, circle, wind, dragon, flower, season
-
+# in addition, all the tiles are programmatically exported in tiles.jl
 
 
 # define the suits and all the tiles

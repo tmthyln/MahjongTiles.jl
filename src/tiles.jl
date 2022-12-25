@@ -1,5 +1,6 @@
 
 #=================================== SUITS ===================================#
+
 """
 The root abstract type for suit types. 
 This is also used to represent "pseudo-suit" types, like the winds, dragons, flowers, etc.

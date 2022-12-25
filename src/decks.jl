@@ -42,6 +42,9 @@ function TilePile(type::Symbol)
     return TilePile(tiles)
 end
 
+Base.:(==)(this::TilePile, that::TilePile) = this.tiles == that.tiles
+Base.hash(tp::TilePile, h::UInt) = hash(tp.tiles, h)
+
 Base.length(tp::TilePile) = length(tp.tiles)
 Base.first(tp::TilePile) = first(tp.tiles)
 Base.first(tp::TilePile, n::Integer) = first(tp.tiles, n)
@@ -98,10 +101,19 @@ Random.shuffle!(rng, tp::TilePile) = (shuffle!(rng, tp.tiles); tp)
 
 Base.circshift(tp::TilePile, shift) = TilePile(circshift(tp.tiles, shift))
 function Base.circshift!(tp::TilePile, shift)
-    temp = tp.tiles[end-shift+1:end]
-    tp.tiles[shift+1:end] = tp.tiles[begin:end-shift+1]
-    tp.tiles[begin:shift] = temp
+    shift %= length(tp.tiles)
 
+    shift == 0 && return tp
+    shift < 0 && (shift += length(tp.tiles))
+
+    @assert shift > 0 && shift < length(tp.tiles)
+
+    @inbounds begin
+        temp = tp.tiles[end-shift+1:end]
+        tp.tiles[shift+1:end] = tp.tiles[begin:end-shift]
+        tp.tiles[begin:shift] = temp
+    end
+    
     return tp
 end
 
