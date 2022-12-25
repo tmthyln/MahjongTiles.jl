@@ -4,7 +4,7 @@ Tiles can also be collected into an abstract idea of a "pile of tiles."
 For example, this is intended to be used to represent the four walls of tiles in the game.
 Decks (called `TilePile`s in code) have several properties:
 
-- Ordered
+- Ordered (but not sorted)
 - Size strictly decreases
 - Removal occurs strictly at the two ends of the pile
 

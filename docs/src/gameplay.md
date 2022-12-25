@@ -1,3 +1,5 @@
 # Playing the Game
 
-At this point, the game loop begins.
+At this point, the game starts properly.
+
+

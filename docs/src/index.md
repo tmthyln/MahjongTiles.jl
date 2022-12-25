@@ -8,7 +8,7 @@ It's designed to be useful for both simulation or gameplay.
 
 To install, you can use the Julia package manager:
 
-```julia
+```julia-repl
 (env) pkg> add MahjongTiles
 ```
 
@@ -35,7 +35,7 @@ see the "API" section of the docs.
 
 There's also a similar project [MahjongEnvironment.jl](https://github.com/coldinjection/MahjongEnvironment);
 however, this package differs in
-- more broad scope beyond just reinforcement learning
-- registered
+- having a broader scope than just reinforcement learning
+- being registered
 - supporting different variants of Mahjong in a more general way
-- is not intended to provide a full Mahjong game environment
+- is not intended to provide the full Mahjong game environment, just a set of useful primitives for potentially doing so

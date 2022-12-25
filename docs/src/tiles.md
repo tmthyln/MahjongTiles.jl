@@ -15,7 +15,7 @@ using MahjongTiles
 
 !!! info
 
-    This is a more internal implementation detail and is subject to change in future versions.
+    This is an internal implementation detail and is subject to change in future versions.
 
 This is the current way that suits are implemented. All suit types inherit from a single abstract type
 ```@docs

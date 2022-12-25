@@ -1,6 +1,7 @@
 # Dealing the Hands
 
-Having [built the wall](building_wall.md), next is the dealing of the hands.
+Having [built the wall](building_wall.md), 
+next we need to deal tiles to each player.
 
 ## Distributing tiles to player hands
 
